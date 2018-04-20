@@ -1,0 +1,17 @@
+{
+  "name": "mosico",
+  "version": "1.0.0",
+  "description": "Simple music player for local files.",
+  "main": "./app/app.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "keywords": [
+    "music"
+  ],
+  "author": "Øyvind Finsnes",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^1.8.4"
+  }
+}
