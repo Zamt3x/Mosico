@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require('electron');
+import { app, BrowserWindow } from 'electron';
 // Keep a global reference of the window object, omission leads to the window
 // closing automatically when the JavaScript object is garbage collected
 let mainWindow = null;
@@ -29,8 +29,10 @@ function setup() {
     show: false,
     minWidth: 300,
     minHeight: 150,
-    backgroundColor: '#111'
+    backgroundColor: '#111',
+    title: 'Mosico - Just play your music'
   });
+  mainWindow.loadURL(`file://${__dirname}/index.html`);
   // mainWindow initialized to show: false to avoid showing window before
   // content has loaded
   mainWindow.on('ready-to-show', () => {
