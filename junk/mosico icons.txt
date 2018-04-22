@@ -1,7 +1,7 @@
 background: #111111
 side-menu: #202020
 play-bar: #252525
-font-color: #eeeeee
+font-color: #ddd
 play-track: #cb2d3e
 
 play &#10148; just put in div and use border for circle
