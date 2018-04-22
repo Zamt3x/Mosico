@@ -1,0 +1,127 @@
+html {
+  /* Color */
+  --main-bg-color: #111;
+  --menu-bg-color: #202020;
+  --playbar-bg-color: #252525;
+  --one-color: #eee;
+  --two-color: #cb2d3e;
+  --one-border-color: #eee;
+  --two-border-color: #cb2d3e;
+  --active-color: #aaa;
+  --shadow-color: #333;
+  font-size: 62.5%;
+}
+
+body {
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+  font-size: 1.6rem;
+  color: var(--one-color);
+  background: var(--main-bg-color);
+}
+
+.grid-2col-2row {
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  grid-template-rows: auto 80px;
+  grid-template-columns: 250px auto;
+}
+/* =============================================================================
+** SIDE-MENU START
+** =============================================================================
+*/
+.side-menu {
+  height: 100%;
+  grid-row-end: 3;
+  grid-row-start: 1;
+  box-sizing: border-box;
+  border-right: solid 1px #000;
+  background-color: var(--menu-bg-color);
+}
+/* =============================================================================
+** SIDE-MENU END
+** =============================================================================
+*/
+
+/* =============================================================================
+** PLAY-BAR START
+** =============================================================================
+*/
+.play-bar {
+  width: 100%;
+  height: 80px;
+  display: flex;
+  grid-row-end: 3;
+  grid-row-start: 2;
+  align-items: center;
+  box-sizing: border-box;
+  justify-content: center;
+  border-top: solid 1px #000;
+  background: var(--playbar-bg-color);
+}
+
+.play-bar .btn {
+  margin: 0 15px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.play-bar .active {
+  color: var(--two-color);
+}
+
+.play-bar .btn:active {
+  color: var(--active-color);
+  border-color: var(--active-color);
+}
+
+.play-bar .btn-play,
+.play-bar .btn-pause {
+  font-size: 2.2rem;
+  border-radius: 50%;
+  line-height: 3.2rem;
+  padding: 0.5rem 1rem;
+  border: solid 2px var(--one-border-color);
+}
+
+.play-bar .btn-prev {
+  transform: rotateZ(180deg);
+}
+
+.play-bar .btn-prev,
+.play-bar .btn-next {
+  font-size: 3.2rem;
+  line-height: 3rem;
+}
+
+.play-bar .btn-random {
+  width: 25px;
+  height: 25px;
+  line-height: 26px;
+  font-size: 3.2rem;
+  position: relative;
+}
+
+.play-bar .btn-random span {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+.play-bar .random-top {
+  transform: rotateZ(-30deg);
+}
+
+.play-bar .random-bottom {
+  transform: rotateZ(30deg);
+}
+
+.play-bar .btn-loop {
+  font-size: 3.2rem;
+}
+/* =============================================================================
+** PLAY-BAR END
+** =============================================================================
+*/
