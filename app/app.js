@@ -27,7 +27,7 @@ function setup() {
     width: 800,
     height: 600,
     show: false,
-    minWidth: 300,
+    minWidth: 320,
     minHeight: 150,
     backgroundColor: '#111',
     title: 'Mosico - Just play your music'
