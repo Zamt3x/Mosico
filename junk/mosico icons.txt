@@ -4,5 +4,8 @@ play-bar: #252525
 font-color: #eeeeee
 play-track: #cb2d3e
 
-play &#10148; just put in div and use border for circle
+V play &#10148;
 pause &#8860;, &#8801;, 2 x &#8212;, 2 x &#124;, &#61;
+V prev / next &#10151;
+loop &#8634;
+random &#8599; + &#8600;
