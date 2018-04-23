@@ -65,7 +65,6 @@ body {
 .play-bar .btn {
   margin: 0 15px;
   cursor: pointer;
-  user-select: none;
 }
 
 .play-bar .active {
@@ -79,43 +78,16 @@ body {
 
 .play-bar .btn-play,
 .play-bar .btn-pause {
-  font-size: 2.2rem;
-  border-radius: 50%;
-  line-height: 3.2rem;
-  padding: 0.5rem 1rem;
-  border: solid 2px var(--one-border-color);
-}
-
-.play-bar .btn-prev {
-  transform: rotateZ(180deg);
+  font-size: 4rem;
 }
 
 .play-bar .btn-prev,
 .play-bar .btn-next {
   font-size: 3.2rem;
-  line-height: 3rem;
 }
 
 .play-bar .btn-random {
-  width: 25px;
-  height: 25px;
-  line-height: 26px;
   font-size: 3.2rem;
-  position: relative;
-}
-
-.play-bar .btn-random span {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-}
-
-.play-bar .random-top {
-  transform: rotateZ(-30deg);
-}
-
-.play-bar .random-bottom {
-  transform: rotateZ(30deg);
 }
 
 .play-bar .btn-loop {
