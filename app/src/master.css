@@ -1,5 +1,10 @@
 /* =============================================================================
 ** GLOBAL STYLES AND CSS VARIABLES
+** background: #111111
+** side-menu: #202020
+** play-bar: #252525
+** font-color: #ddd
+** play-track: #cb2d3e
 ** =============================================================================
 */
 html {
@@ -71,6 +76,7 @@ body {
   height: 80px;
   grid-row-end: 3;
   grid-row-start: 2;
+  position: relative;
   box-sizing: border-box;
   border-top: solid 1px #000;
   background: var(--playbar-bg-color);
@@ -120,6 +126,33 @@ body {
 .play-bar .btn-loop {
   font-size: 2.2rem;
   transition: color 100ms ease;
+}
+
+.play-bar .btn-volume {
+  font-size: 3rem;
+}
+/* Requires three levels to override previous display: block */
+.play-bar div .volume-popup {
+  top: -85px;
+  right: 10px;
+  width: 30px;
+  height: 100px;
+  display: none;
+  border-radius: 5%;
+  position: absolute;
+  border: 1px solid var(--main-bg-color);
+  background-color: var(--playbar-bg-color);
+}
+
+.play-bar .btn-volume:hover > .play-bar div .volume-popup {
+  display: block;
+}
+
+.play-bar .play-track {
+  height: 3px;
+  width: 100%;
+  position: absolute;
+  background-color: var(--two-color);
 }
 /* =============================================================================
 ** PLAY-BAR END

@@ -1,9 +1,15 @@
 import React from 'react';
+// Track that enables user to interact with song currently playing
 class Playtrack extends React.Component {
   render() {
-    return <div />;
+    return <div className="play-track" />;
+  }
+  componentDidMount() {
+    playtrack = this;
   }
 }
+let playtrack;
+// The main conatiner for both controls and the playtrack
 class Playbar extends React.Component {
   constructor(props) {
     super(props);
@@ -60,7 +66,8 @@ class Playbar extends React.Component {
           </div>
           {/* Volume controls */}
           <div>
-            <i className="material-icons btn">volume_up</i>
+            <i className="material-icons btn btn-volume">volume_up</i>
+            <div className="volume-popup" />
           </div>
         </div>
       </div>
