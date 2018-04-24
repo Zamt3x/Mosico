@@ -1,23 +1,19 @@
 /* =============================================================================
 ** GLOBAL STYLES AND CSS VARIABLES
-** background: #111111
-** side-menu: #202020
-** play-bar: #252525
-** font-color: #ddd
-** play-track: #cb2d3e
 ** =============================================================================
 */
 html {
   /* Color */
-  --main-bg-color: #111;
-  --menu-bg-color: #202020;
-  --playbar-bg-color: #252525;
-  --one-color: #eee;
-  --two-color: #cb2d3e;
-  --one-border-color: #eee;
-  --two-border-color: #cb2d3e;
-  --active-color: #aaa;
-  --shadow-color: #333;
+  /* 7 => dark, light >= 8 ((color[0] + color[2] + color[5]) / 3)*/
+  --one-dark: #111;
+  --two-dark: #202020;
+  --three-dark: #252525;
+  --four-dark: #000;
+  --five-dark: #333;
+  --six-dark: #303030;
+  --one-light: #eee;
+  --two-light: #aaa;
+  --one-red: #db273a;
   font-size: 62.5%;
 }
 
@@ -26,8 +22,8 @@ body {
   width: 100vw;
   height: 100vh;
   font-size: 1.6rem;
-  color: var(--one-color);
-  background: var(--main-bg-color);
+  color: var(--one-light);
+  background: var(--one-dark);
   animation: fadeIn ease 500ms forwards;
 }
 
@@ -37,6 +33,12 @@ body {
   display: grid;
   grid-template-rows: auto 80px;
   grid-template-columns: 250px auto;
+}
+/* Reset ul styles */
+ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
 }
 /* =============================================================================
 ** CSS KEYFRAMES FOR ANIMATIONS
@@ -50,6 +52,26 @@ body {
     opacity: 1;
   }
 }
+@keyframes expandPlayTrack {
+  from {
+    top: -3px;
+    height: 3px;
+  }
+  to {
+    top: -10px;
+    height: 10px;
+  }
+}
+@keyframes retractPlayTrack {
+  from {
+    top: -10px;
+    height: 10px;
+  }
+  to {
+    top: -3px;
+    height: 3px;
+  }
+}
 /* =============================================================================
 ** SIDE-MENU START
 ** =============================================================================
@@ -59,14 +81,48 @@ body {
   grid-row-end: 3;
   grid-row-start: 1;
   box-sizing: border-box;
-  border-right: solid 1px #000;
-  background-color: var(--menu-bg-color);
+  background-color: var(--two-dark);
+  border-right: solid 1px var(--four-dark);
+}
+
+.side-menu .logo {
+  width: 100%;
+  height: 60px;
+  background-color: var(--five-dark);
+}
+
+.side-menu .links-container {
+  width: 100%;
+  display: flex;
+  margin-top: 50px;
+  flex-direction: column;
+}
+
+.side-menu .link {
+  margin-left: 5px;
+  font-size: 2.4rem;
+  padding-top: 5px;
+  padding-left: 25px;
+  margin-bottom: 15px;
+  padding-bottom: 5px;
+  text-decoration: none;
+  color: var(--one-light);
+  transition: color ease 100ms;
+}
+
+.side-menu .link:hover:not(.active) {
+  color: var(--two-light);
+}
+
+.side-menu .active {
+  margin-left: 0;
+  color: var(--one-red);
+  border-left: 6px solid var(--one-red);
 }
 /* =============================================================================
 ** SIDE-MENU END
 ** =============================================================================
 */
-
 /* =============================================================================
 ** PLAY-BAR START
 ** =============================================================================
@@ -78,8 +134,8 @@ body {
   grid-row-start: 2;
   position: relative;
   box-sizing: border-box;
-  border-top: solid 1px #000;
-  background: var(--playbar-bg-color);
+  background: var(--three-dark);
+  border-top: solid 1px var(--four-dark);
 }
 
 .play-bar .controls {
@@ -104,12 +160,12 @@ body {
 }
 
 .play-bar .active {
-  color: var(--two-color);
+  color: var(--one-red);
 }
 
 .play-bar .btn:active {
-  color: var(--active-color);
-  border-color: var(--active-color);
+  color: var(--two-light);
+  border-color: var(--two-light);
 }
 
 .play-bar .btn-play,
@@ -125,36 +181,67 @@ body {
 .play-bar .btn-random,
 .play-bar .btn-loop {
   font-size: 2.2rem;
-  transition: color 100ms ease;
+  transition: color 50ms ease;
 }
 
 .play-bar .btn-volume {
   font-size: 3rem;
 }
-/* Requires three levels to override previous display: block */
+/* Requires three levels to override display: block declared previously */
 .play-bar div .volume-popup {
-  top: -85px;
+  top: -100px;
   right: 10px;
   width: 30px;
   height: 100px;
   display: none;
   border-radius: 5%;
   position: absolute;
-  border: 1px solid var(--main-bg-color);
-  background-color: var(--playbar-bg-color);
+  border: 1px solid var(--one-dark);
+  background-color: var(--six-dark);
 }
-
-.play-bar .btn-volume:hover > .play-bar div .volume-popup {
+/* Arrow at the bottom of volume popup */
+.play-bar div .volume-popup::after {
+  left: 0;
+  content: '';
+  bottom: -30px;
+  position: absolute;
+  border: solid 15px transparent;
+  border-top-color: var(--six-dark);
+}
+/* Show volume knob when icon or popup is hovered */
+.play-bar div .volume-popup:hover,
+.play-bar .btn-volume:hover + .volume-popup {
   display: block;
 }
 
 .play-bar .play-track {
-  height: 3px;
+  top: -3px;
   width: 100%;
+  height: 3px;
+  cursor: pointer;
   position: absolute;
-  background-color: var(--two-color);
+  background-color: var(--one-red);
+  animation: retractPlayTrack 200ms ease forwards;
+}
+/* Both hovers on play-track and play-bar extends the play-track */
+.play-bar .play-track:hover,
+.play-bar:hover > .play-track {
+  animation: expandPlayTrack 200ms ease forwards;
 }
 /* =============================================================================
 ** PLAY-BAR END
+** =============================================================================
+*/
+/* =============================================================================
+** MAIN-PAGE START
+** =============================================================================
+*/
+.main-page {
+  padding-top: 30px;
+  padding-left: 60px;
+  box-sizing: border-box;
+}
+/* =============================================================================
+** MAIN-PAGE END
 ** =============================================================================
 */

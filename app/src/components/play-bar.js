@@ -1,15 +1,4 @@
 import React from 'react';
-// Track that enables user to interact with song currently playing
-class Playtrack extends React.Component {
-  render() {
-    return <div className="play-track" />;
-  }
-  componentDidMount() {
-    playtrack = this;
-  }
-}
-let playtrack;
-// The main conatiner for both controls and the playtrack
 class Playbar extends React.Component {
   constructor(props) {
     super(props);
@@ -32,19 +21,11 @@ class Playbar extends React.Component {
     this.state.random ? this.setState({ random: false }) : this.setState({ random: true });
   }
   render() {
-    let btnTrackState = this.state.play ? (
-      <i className="material-icons btn btn-pause" onClick={this.toggleTrack}>
-        pause
-      </i>
-    ) : (
-      <i className="material-icons btn btn-play" onClick={this.toggleTrack}>
-        play_arrow
-      </i>
-    );
+    const { random, loop, play } = this.state;
     return (
       <div className="play-bar">
         {/* Play track */}
-        <Playtrack />
+        <div className="play-track" />
         <div className="controls">
           {/* Song information, artist and name */}
           <div>
@@ -52,15 +33,15 @@ class Playbar extends React.Component {
           </div>
           {/* Player controls */}
           <div>
-            <i
-              className={'material-icons btn btn-random' + (this.state.random ? ' active' : '')}
-              onClick={this.toggleRandom}>
+            <i className={'material-icons btn btn-random' + (random ? ' active' : '')} onClick={this.toggleRandom}>
               shuffle
             </i>
             <i className="material-icons btn btn-prev">skip_previous</i>
-            {btnTrackState}
+            <i className={'material-icons btn' + (play ? ' btn-pause' : ' btn-play')} onClick={this.toggleTrack}>
+              {play ? 'pause' : 'play_arrow'}
+            </i>
             <i className="material-icons btn btn-next">skip_next</i>
-            <i className={'material-icons btn btn-loop' + (this.state.loop ? ' active' : '')} onClick={this.toggleLoop}>
+            <i className={'material-icons btn btn-loop' + (loop ? ' active' : '')} onClick={this.toggleLoop}>
               loop
             </i>
           </div>
