@@ -1,45 +1,68 @@
 import React from 'react';
+class Playtrack extends React.Component {
+  render() {
+    return <div />;
+  }
+}
 class Playbar extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    this.toggleLoop = this.toggleLoop.bind(this);
+    this.toggleTrack = this.toggleTrack.bind(this);
+    this.toggleRandom = this.toggleRandom.bind(this);
     this.state = {
       play: false,
       loop: false,
       random: false
     };
-    this.play = this.play.bind(this);
-    this.pause = this.pause.bind(this);
   }
-  pause() {
-    this.setState({ play: false });
+  toggleTrack({ target }) {
+    this.state.play ? this.setState({ play: false }) : this.setState({ play: true });
   }
-  play() {
-    this.setState({ play: true });
+  toggleLoop() {
+    this.state.loop ? this.setState({ loop: false }) : this.setState({ loop: true });
+  }
+  toggleRandom() {
+    this.state.random ? this.setState({ random: false }) : this.setState({ random: true });
   }
   render() {
+    let btnTrackState = this.state.play ? (
+      <i className="material-icons btn btn-pause" onClick={this.toggleTrack}>
+        pause
+      </i>
+    ) : (
+      <i className="material-icons btn btn-play" onClick={this.toggleTrack}>
+        play_arrow
+      </i>
+    );
     return (
       <div className="play-bar">
-        <i
-          className={this.state.random ? 'material-icons btn btn-random active' : 'material-icons btn btn-random'}
-          onClick={() => {
-            this.state.random ? this.setState({ random: false }) : this.setState({ random: true });
-          }}>
-          shuffle
-        </i>
-        <i className="material-icons btn btn-prev">skip_previous</i>
-        {this.state.play ? (
-          <i className="material-icons btn btn-pause">pause_circle_outline</i>
-        ) : (
-          <i className="material-icons btn btn-play">play_circle_outline</i>
-        )}
-        <i className="material-icons btn btn-next">skip_next</i>
-        <i
-          className={this.state.loop ? 'material-icons btn btn-loop active' : 'material-icons btn btn-loop'}
-          onClick={() => {
-            this.state.loop ? this.setState({ loop: false }) : this.setState({ loop: true });
-          }}>
-          loop
-        </i>
+        {/* Play track */}
+        <Playtrack />
+        <div className="controls">
+          {/* Song information, artist and name */}
+          <div>
+            <h2>Song info</h2>
+          </div>
+          {/* Player controls */}
+          <div>
+            <i
+              className={'material-icons btn btn-random' + (this.state.random ? ' active' : '')}
+              onClick={this.toggleRandom}>
+              shuffle
+            </i>
+            <i className="material-icons btn btn-prev">skip_previous</i>
+            {btnTrackState}
+            <i className="material-icons btn btn-next">skip_next</i>
+            <i className={'material-icons btn btn-loop' + (this.state.loop ? ' active' : '')} onClick={this.toggleLoop}>
+              loop
+            </i>
+          </div>
+          {/* Volume controls */}
+          <div>
+            <i className="material-icons btn">volume_up</i>
+          </div>
+        </div>
       </div>
     );
   }
