@@ -1,4 +1,5 @@
 import React from 'react';
+import Sound from 'react-sound';
 class Playbar extends React.Component {
   constructor(props) {
     super(props);
@@ -26,8 +27,8 @@ class Playbar extends React.Component {
       <div className="play-bar">
         {/* Play track */}
         <div className="play-track">
-          <p className="current">Current</p>
-          <p className="end">End</p>
+          <p className="current">0:00</p>
+          <p className="end">6:53</p>
         </div>
         <div className="controls">
           {/* Song information, artist and name */}

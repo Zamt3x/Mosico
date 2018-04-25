@@ -7,7 +7,7 @@ class Menu extends React.Component {
         <div className="logo" />
         <HashRouter>
           <ul className="links-container">
-            <NavLink className="link" to="/welcome">
+            <NavLink className="link" to="/upload">
               Welcome
             </NavLink>
             <NavLink className="link" to="/genius">

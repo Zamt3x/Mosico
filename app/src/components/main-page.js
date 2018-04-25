@@ -1,16 +1,16 @@
 import React from 'react';
+import { Upload } from './upload-page.js';
 import { Redirect, HashRouter, Switch, Route } from 'react-router-dom';
 class MainPage extends React.Component {
   render() {
-    const Welcome = () => <h1>File upload</h1>;
     const Lyrics = () => <h1>Lyrics</h1>;
     return (
       <div className="main-page">
         <HashRouter>
           <Switch>
-            <Route path="/welcome" component={Welcome} />
+            <Route path="/upload" component={Upload} />
             <Route path="/genius" component={Lyrics} />
-            <Redirect from="/" to="/welcome" />
+            <Redirect from="/" to="/upload" />
           </Switch>
         </HashRouter>
       </div>

@@ -152,7 +152,6 @@ ul {
   position: relative;
   box-sizing: border-box;
   background: var(--three-dark);
-  border-top: solid 1px var(--four-dark);
 }
 
 .play-bar .controls {
@@ -238,6 +237,7 @@ ul {
   cursor: pointer;
   position: absolute;
   background-color: var(--one-red);
+  border-top: 1px solid var(--four-dark);
   animation: retractPlayTrack 200ms ease forwards;
 }
 
