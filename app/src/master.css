@@ -40,6 +40,10 @@ ul {
   padding: 0;
   list-style-type: none;
 }
+
+.hide {
+  display: none;
+}
 /* =============================================================================
 ** CSS KEYFRAMES FOR ANIMATIONS
 ** =============================================================================
@@ -64,8 +68,8 @@ ul {
 }
 @keyframes retractPlayTrack {
   from {
-    top: -10px;
-    height: 10px;
+    top: -8px;
+    height: 8px;
   }
   to {
     top: -3px;
@@ -115,16 +119,12 @@ ul {
 }
 
 .side-menu .link {
-  margin-left: 5px;
-  padding-top: 5px;
   user-select: none;
   font-size: 2.4rem;
-  padding-left: 25px;
-  margin-bottom: 15px;
-  padding-bottom: 5px;
+  margin: 0 0 15px 6px;
   text-decoration: none;
+  padding: 5px 0 5px 25px;
   color: var(--one-light);
-  transition: color ease 100ms;
 }
 
 .side-menu .link:hover:not(.active) {
@@ -133,7 +133,6 @@ ul {
 
 .side-menu .active {
   margin-left: 0;
-  color: var(--one-red);
   border-left: 6px solid var(--one-red);
 }
 /* =============================================================================
@@ -260,7 +259,7 @@ ul {
 .play-bar:hover > .play-track {
   animation: expandPlayTrack 200ms ease forwards;
 }
-
+/* Expand track duration information when play-bar is hovered */
 .play-bar:hover .play-track > p {
   animation: expandTrackDuration 200ms ease forwards;
 }

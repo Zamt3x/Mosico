@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, ipcMain } from 'electron';
 // Keep a global reference of the window object, omission leads to the window
 // closing automatically when the JavaScript object is garbage collected
 let mainWindow = null;
@@ -21,6 +21,17 @@ app.on('activate', () => {
     setup();
   }
 });
+// ipcMain-events coming from renderer
+ipcMain.on('get-storage-file', (e, path) => {
+  // storage
+  //   .get(path)
+  //   .then(data => {
+  //     mainWindow.webContents.send('file-request', data);
+  //   })
+  //   .catch(err => {
+  //     console.error(err);
+  //   });
+});
 // Functions that are not listening for events
 function setup() {
   mainWindow = new BrowserWindow({
@@ -38,8 +49,27 @@ function setup() {
   mainWindow.on('ready-to-show', () => {
     mainWindow.maximize();
     mainWindow.show();
+    // createNewUserFiles();
   });
   mainWindow.on('closed', () => {
     mainWindow = null;
   });
+}
+// Creates a new folder in users userData (location varies on every system)
+function createNewUserFiles() {
+  // Check for directory Mosico
+  // storage.isPathExists('mosico').then(itDoes => {
+  //   // If path already exists, return from function
+  //   if (itDoes) {
+  //     return;
+  //   }
+  //   storage
+  //     .set('Mosico/')
+  //     .then(() => {
+  //       console.log('Successfully written to storage');
+  //     })
+  //     .catch(err => {
+  //       console.error(err);
+  //     });
+  // });
 }

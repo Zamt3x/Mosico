@@ -3,14 +3,14 @@ import Sound from 'react-sound';
 class Playbar extends React.Component {
   constructor(props) {
     super(props);
-    this.toggleLoop = this.toggleLoop.bind(this);
-    this.toggleTrack = this.toggleTrack.bind(this);
-    this.toggleRandom = this.toggleRandom.bind(this);
     this.state = {
       play: false,
       loop: false,
       random: false
     };
+    this.toggleLoop = this.toggleLoop.bind(this);
+    this.toggleTrack = this.toggleTrack.bind(this);
+    this.toggleRandom = this.toggleRandom.bind(this);
   }
   toggleTrack({ target }) {
     this.state.play ? this.setState({ play: false }) : this.setState({ play: true });
@@ -52,7 +52,7 @@ class Playbar extends React.Component {
           {/* Volume controls */}
           <div>
             <i className="material-icons btn btn-volume">volume_up</i>
-            <div className="volume-popup" />
+            <div className="volume-popup hide" />
           </div>
         </div>
       </div>
