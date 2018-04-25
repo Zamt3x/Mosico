@@ -33,6 +33,8 @@ function setup() {
     title: 'Mosico - Just play your music'
   });
   mainWindow.loadURL(`file://${__dirname}/index.html`);
+  // Remove top menu
+  // mainWindow.setMenu(null);
   // mainWindow initialized to show: false to avoid showing window before
   // content has loaded
   mainWindow.on('ready-to-show', () => {

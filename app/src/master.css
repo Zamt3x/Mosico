@@ -72,6 +72,22 @@ ul {
     height: 3px;
   }
 }
+@keyframes retractTrackDuration {
+  from {
+    top: -50px;
+  }
+  to {
+    top: 10px;
+  }
+}
+@keyframes expandTrackDuration {
+  from {
+    top: 10px;
+  }
+  to {
+    top: -50px;
+  }
+}
 /* =============================================================================
 ** SIDE-MENU START
 ** =============================================================================
@@ -100,8 +116,9 @@ ul {
 
 .side-menu .link {
   margin-left: 5px;
-  font-size: 2.4rem;
   padding-top: 5px;
+  user-select: none;
+  font-size: 2.4rem;
   padding-left: 25px;
   margin-bottom: 15px;
   padding-bottom: 5px;
@@ -223,10 +240,29 @@ ul {
   background-color: var(--one-red);
   animation: retractPlayTrack 200ms ease forwards;
 }
-/* Both hovers on play-track and play-bar extends the play-track */
-.play-bar .play-track:hover,
+
+.play-bar .play-track p {
+  top: -50px;
+  z-index: -1;
+  user-select: none;
+  position: absolute;
+  animation: retractTrackDuration 200ms ease forwards;
+}
+
+.play-bar .current {
+  left: 20px;
+}
+
+.play-bar .end {
+  right: 20px;
+}
+/* Expand play-track when play-bar is hovered */
 .play-bar:hover > .play-track {
   animation: expandPlayTrack 200ms ease forwards;
+}
+
+.play-bar:hover .play-track > p {
+  animation: expandTrackDuration 200ms ease forwards;
 }
 /* =============================================================================
 ** PLAY-BAR END

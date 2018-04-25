@@ -25,7 +25,10 @@ class Playbar extends React.Component {
     return (
       <div className="play-bar">
         {/* Play track */}
-        <div className="play-track" />
+        <div className="play-track">
+          <p className="current">Current</p>
+          <p className="end">End</p>
+        </div>
         <div className="controls">
           {/* Song information, artist and name */}
           <div>
