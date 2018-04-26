@@ -1,5 +1,6 @@
 import React from 'react';
 import Sound from 'react-sound';
+import { ipcRenderer } from 'electron';
 class Playbar extends React.Component {
   constructor(props) {
     super(props);
