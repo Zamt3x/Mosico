@@ -34,7 +34,9 @@ class Playbar extends React.Component {
         </div>
         <div className="controls">
           {/* Song information, artist and name */}
-          <div>{appData ? appData.sourcePath : 'Nothing'}</div>
+          <div>
+            <h2>Song info</h2>
+          </div>
           {/* Player controls */}
           <div>
             <i className={'material-icons btn btn-random' + (random ? ' active' : '')} onClick={this.toggleRandom}>
@@ -61,10 +63,10 @@ class Playbar extends React.Component {
   componentDidMount() {
     Storage.readFile('app-data.json')
       .then(data => {
-        this.setState({ appData: data });
+        this.setState({ appData: JSON.parse(data) });
       })
       .catch(err => {
-        this.setState({ appData: 'No file' });
+        this.setState({ appData: null });
       });
   }
 }

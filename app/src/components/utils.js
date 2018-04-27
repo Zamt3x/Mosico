@@ -3,7 +3,7 @@ import path from 'path';
 import { remote } from 'electron';
 const dataPath = remote.app.getPath('userData');
 class Storage {
-  // Takes in a file name and returns the content parsed as JSON
+  // Takes in a file name and returns the content
   static readFile(fileName) {
     const filePath = path.join(dataPath + '/data', fileName);
     return new Promise((resolve, reject) => {
@@ -12,13 +12,22 @@ class Storage {
           reject(err);
         } else {
           const file = data.replace(/\\/g, '/');
-          resolve(JSON.parse(file));
+          resolve(file);
         }
       });
     });
   }
-  static newFile(fileName, content) {
-    // const folderPath = fp[0].replace(/\\/g, '/');
+  static writeFile(fileName, content) {
+    const filePath = path.join(dataPath + '/data', fileName);
+    return new Promise((resolve, reject) => {
+      fs.writeFile(filePath, content, err => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve();
+        }
+      });
+    });
   }
 }
 module.exports = { Storage };
