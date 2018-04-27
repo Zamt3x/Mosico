@@ -4,14 +4,14 @@
 */
 html {
   /* Color */
-  --main-bg: #111;
+  --main-bg: #101010;
   --side-menu-bg: #202020;
   --play-bar-bg: #252525;
-  --border-color: #000;
-  --placeholder: #333;
+  --border-color: #000000;
+  --placeholder: #333333;
   --volume-popup-bg: #303030;
-  --font-color: #eee;
-  --active-color: #aaa;
+  --font-color: #eeeeee;
+  --active-color: #aaaaaa;
   --theme-color: #db273a;
   font-size: 62.5%;
 }
@@ -103,10 +103,10 @@ ul {
 
 .side-menu .link {
   user-select: none;
-  font-size: 2.4rem;
+  font-size: 2rem;
   margin: 0 0 15px 6px;
   text-decoration: none;
-  padding: 5px 0 5px 25px;
+  padding: 10px 0 10px 25px;
   color: var(--font-color);
 }
 
@@ -171,15 +171,19 @@ ul {
   font-size: 5rem;
 }
 
+.play-bar .btn-play:hover,
+.play-bar .btn-pause:hover {
+  transform: scale(1.1);
+}
+
 .play-bar .btn-prev,
 .play-bar .btn-next {
-  font-size: 3.2rem;
+  font-size: 3.4rem;
 }
 
 .play-bar .btn-random,
 .play-bar .btn-loop {
-  font-size: 2.2rem;
-  transition: color 50ms ease;
+  font-size: 2.4rem;
 }
 
 .play-bar .btn-volume {

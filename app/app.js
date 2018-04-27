@@ -24,22 +24,6 @@ app.on('activate', () => {
     setup();
   }
 });
-// ipcMain-events coming from renderer
-// ipcMain.on('get-storage-file', (e, fileName) => {
-//   const dataPath = app.getPath('userData');
-//   const filePath = path.join(dataPath, 'data/' + fileName + '.json');
-//   try {
-//     const file = fs.readFileSync(filePath, 'utf8');
-//     if (file) {
-//       mainWindow.webContents.send('file-request', JSON.parse(file));
-//     } else {
-//       mainWindow.webContents.send('file-request', null);
-//     }
-//   } catch (err) {
-//     // If there was some kind of error, return the passed in defaults instead
-//     console.error(err, ' NO-FILE-FOUND');
-//   }
-// });
 // Functions that are not listening for events
 function setup() {
   let obj = getWindowBounds();
@@ -49,7 +33,7 @@ function setup() {
     minHeight: 150,
     width: obj.width,
     height: obj.height,
-    backgroundColor: '#111',
+    backgroundColor: '#101010',
     title: 'Mosico - Just play your music'
   });
   mainWindow.loadURL(`file://${__dirname}/index.html`);
@@ -65,21 +49,33 @@ function setup() {
 // Attempts to get window bounds saved in user-settings. If the user is new, file
 // with default values will be made
 function getWindowBounds() {
+  const screenSize = electron.screen.getPrimaryDisplay().size;
   const dataPath = app.getPath('userData');
   if (fs.existsSync(dataPath + '/data')) {
     // If user settings exists, use daved dimensions
     const settingsFile = fs.readFileSync(dataPath + '/data/user-settings.json', 'utf8');
-    // Parse file as JSON and use dimensions stored in winBounds
-    return JSON.parse(settingsFile).winBounds;
+    if (settingsFile) {
+      // Parse file as JSON and use dimensions stored in winBounds
+      return JSON.parse(settingsFile).winBounds;
+    } else {
+      // Make new settings file, but not directory
+      makeUserSettings(dataPath, screenSize, false);
+    }
   } else {
-    const screenSize = electron.screen.getPrimaryDisplay().size;
-    // Make a new direcotry called 'data'
-    fs.mkdirSync(path.join(dataPath, 'data'));
-    // Make a new file in folder 'data' called 'settings.json' which contains
-    // the object 'winBounds' with window dimensions
-    const content = `{"winBounds": {"width": ${screenSize.width - 200},"height":${screenSize.height - 100}}}`;
-    fs.writeFileSync(dataPath + '/data/user-settings.json', content);
-    // Return 'size' object containing width and height of screen
-    return { width: screenSize.width - 200, height: screenSize.height - 100 };
+    makeUserSettings(dataPath, screenSize, true);
   }
+  // Return 'size' object containing width and height of screen
+  return { width: screenSize.width - 200, height: screenSize.height - 100 };
+}
+// Takes path to users appData-folder and bool to determine if dir 'data' should
+// be made (might already exist)
+function makeUserSettings(dataPath, screenSize, makedir) {
+  // Make a new direcotry 'data'
+  if (makedir) {
+    fs.mkdirSync(path.join(dataPath, 'data'));
+  }
+  // Make a new file in directory 'data' called 'settings.json' which contains the
+  // object 'winBounds' with window dimensions
+  const content = `{"winBounds": {"width": ${screenSize.width - 200},"height":${screenSize.height - 100}}}`;
+  fs.writeFileSync(dataPath + '/data/user-settings.json', content);
 }

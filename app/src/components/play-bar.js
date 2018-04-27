@@ -1,13 +1,14 @@
 import React from 'react';
 import Sound from 'react-sound';
-import { ipcRenderer } from 'electron';
+import { Storage } from './utils.js';
 class Playbar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       play: false,
       loop: false,
-      random: false
+      random: false,
+      appData: null
     };
     this.toggleLoop = this.toggleLoop.bind(this);
     this.toggleTrack = this.toggleTrack.bind(this);
@@ -23,19 +24,17 @@ class Playbar extends React.Component {
     this.state.random ? this.setState({ random: false }) : this.setState({ random: true });
   }
   render() {
-    const { random, loop, play } = this.state;
+    const { random, loop, play, appData } = this.state;
     return (
       <div className="play-bar">
         {/* Play track */}
         <div className="play-track">
           <p className="current">0:00</p>
-          <p className="end">6:53</p>
+          <p className="end">4:43</p>
         </div>
         <div className="controls">
           {/* Song information, artist and name */}
-          <div>
-            <h2>Song info</h2>
-          </div>
+          <div>{appData ? appData.sourcePath : 'Nothing'}</div>
           {/* Player controls */}
           <div>
             <i className={'material-icons btn btn-random' + (random ? ' active' : '')} onClick={this.toggleRandom}>
@@ -58,6 +57,15 @@ class Playbar extends React.Component {
         </div>
       </div>
     );
+  }
+  componentDidMount() {
+    Storage.readFile('app-data.json')
+      .then(data => {
+        this.setState({ appData: data });
+      })
+      .catch(err => {
+        this.setState({ appData: 'No file' });
+      });
   }
 }
 module.exports = { Playbar };
