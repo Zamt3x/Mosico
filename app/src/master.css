@@ -4,15 +4,15 @@
 */
 html {
   /* Color */
-  --main-bg: #101010;
-  --side-menu-bg: #202020;
-  --play-bar-bg: #252525;
-  --border-color: #000000;
-  --placeholder: #333333;
-  --volume-popup-bg: #303030;
+  --main-bg: #151515;
   --font-color: #eeeeee;
-  --active-color: #aaaaaa;
+  --play-bar-bg: #252525;
+  --placeholder: #333333;
   --theme-color: #db273a;
+  --side-menu-bg: #202020;
+  --border-color: #000000;
+  --active-color: #aaaaaa;
+  --volume-popup-bg: #303030;
   font-size: 62.5%;
 }
 
@@ -42,6 +42,46 @@ ul {
 
 .hide {
   display: none;
+}
+
+.button {
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  padding: 6px 10px;
+  font-size: 1.5rem;
+  border-radius: 2px;
+  color: var(--font-color);
+  text-transform: uppercase;
+  background-color: var(--theme-color);
+}
+
+.button:hover {
+  transform: scale(1.05);
+}
+
+.main-content-container {
+  overflow-y: auto;
+  padding: 30px 60px 0;
+  box-sizing: border-box;
+}
+
+.scrollbar::-webkit-scrollbar {
+  width: 1rem;
+}
+
+.scrollbar::-webkit-scrollbar-track {
+  background-color: var(--side-menu-bg);
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  height: 3rem;
+  background-color: var(--active-color);
+}
+
+.grouper-horiz {
+  display: flex;
+  align-items: center;
 }
 /* =============================================================================
 ** CSS KEYFRAMES FOR ANIMATIONS
@@ -97,17 +137,24 @@ ul {
 .side-menu .links-container {
   width: 100%;
   display: flex;
-  margin-top: 50px;
+  margin-top: 30px;
   flex-direction: column;
 }
 
 .side-menu .link {
   user-select: none;
-  font-size: 2rem;
+  font-size: 1.9rem;
   margin: 0 0 15px 6px;
   text-decoration: none;
-  padding: 10px 0 10px 25px;
   color: var(--font-color);
+  padding: 10px 0 10px 25px;
+  transition: color ease 150ms;
+}
+
+.side-menu .list-heading {
+  cursor: default;
+  margin-left: -5px;
+  color: var(--active-color);
 }
 
 .side-menu .link:hover:not(.active) {
@@ -214,6 +261,7 @@ ul {
 .play-bar div .volume-popup:hover,
 .play-bar .btn-volume:hover + .volume-popup {
   display: block;
+  animation: fadeIn 200ms ease forwards;
 }
 
 .play-bar .play-track {
@@ -235,7 +283,7 @@ ul {
 }
 
 .play-bar .current {
-  left: 20px;
+  left: 10px;
 }
 
 .play-bar .end {
@@ -250,15 +298,39 @@ ul {
 ** =============================================================================
 */
 /* =============================================================================
-** MAIN-PAGE START
+** MAIN-CONTENT START
 ** =============================================================================
 */
-.main-page {
-  padding-top: 30px;
-  padding-left: 60px;
-  box-sizing: border-box;
+.main-content-container .heading-info {
+  margin-left: 15px;
+  color: var(--active-color);
+}
+
+.main-content-container .divider {
+  width: 100%;
+  margin-top: 10px;
+  border-bottom: 1px solid var(--volume-popup-bg);
+}
+
+.main-content-container .song-list {
+  margin-bottom: 50px;
+}
+
+.main-content-container .song-container {
+  width: 100%;
+  display: grid;
+  align-items: center;
+  grid-template-columns: repeat(2, 1fr);
+  border-bottom: 1px solid var(--play-bar-bg);
+}
+
+.main-content-container .btn {
+  cursor: pointer;
+  user-select: none;
+  font-size: 2.5rem;
+  margin-right: 15px;
 }
 /* =============================================================================
-** MAIN-PAGE END
+** MAIN-CONTENT END
 ** =============================================================================
 */

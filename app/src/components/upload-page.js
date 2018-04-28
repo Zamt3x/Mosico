@@ -7,9 +7,12 @@ class Upload extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      totalSongs: 0,
       appData: null,
-      musicPath: null
+      musicPath: null,
+      fileNames: null
     };
+    this.getFileList = this.getFileList.bind(this);
     this.setFolderPath = this.setFolderPath.bind(this);
   }
   setFolderPath(fp) {
@@ -36,28 +39,92 @@ class Upload extends React.Component {
         });
       });
   }
+  getFileList() {
+    let items = [];
+    // Allowed file types (audio)
+    const EXTENSIONS = ['.mp3', '.ogg', '.flac', '.wav', '.aac'];
+    // Loop through files in folder and filter away files with unsupported
+    // extension
+    let targetFiles = this.state.fileNames.filter(name => {
+      for (let EXTENSION of EXTENSIONS) {
+        // Checks name against multiple extensions
+        if (path.extname(name).toLowerCase() === EXTENSION) {
+          return true;
+        }
+      }
+      return false;
+    });
+    // Make an array of li-elements containing all the songs
+    for (let name of targetFiles) {
+      // Gets rid of extension name with RegExp
+      const formatName = name.replace(/\.[^/.]+$/, '');
+      //FIXME: potentially add settings option for choosing delimiter (-)
+      //FIXME: potentially add setting for choosing if artist or songname comes
+      // first in names (artist - name / name - artist)
+      const separatedNames = formatName.split('-');
+      items.push(
+        <li className="song-container" key={name}>
+          <div className="grouper-horiz">
+            <i className="material-icons btn">play_arrow</i>
+            <p>{separatedNames[1]}</p>
+          </div>
+          <p>{separatedNames[0]}</p>
+        </li>
+      );
+    }
+    // this.setState({ totalSongs: items.length });
+    return <ul className="song-list">{items}</ul>;
+  }
   render() {
-    const { musicPath } = this.state;
-    return (
+    const { musicPath, fileNames } = this.state;
+    return musicPath ? (
+      // Defined music path
       <div>
-        <h1>Specify music path</h1>
+        <h1>Play from local files</h1>
+        <div className="grouper-horiz">
+          <button
+            className="button"
+            onClick={() => {
+              remote.dialog.showOpenDialog(
+                remote.getCurrentWindow(),
+                {
+                  buttonLabel: 'Set folder',
+                  properties: ['openDirectory'],
+                  title: 'Browse for folder'
+                },
+                filesPath => {
+                  this.setFolderPath(filesPath);
+                }
+              );
+            }}>
+            Change
+          </button>
+          <h3 className="heading-info">{musicPath}</h3>
+        </div>
+        <div className="divider" />
+        <div>{fileNames ? this.getFileList() : 'Loading files...'}</div>
+      </div>
+    ) : (
+      // Undefined music path
+      <div>
+        <h1>Set path to local files</h1>
         <button
+          className="button"
           onClick={() => {
             remote.dialog.showOpenDialog(
               remote.getCurrentWindow(),
               {
                 buttonLabel: 'Set folder',
                 properties: ['openDirectory'],
-                title: 'Choose folder with music files'
+                title: 'Browse for folder'
               },
               filesPath => {
                 this.setFolderPath(filesPath);
               }
             );
           }}>
-          Choose path
+          Pick Folder
         </button>
-        <h3>{musicPath ? musicPath : 'No path specified'}</h3>
       </div>
     );
   }
@@ -65,7 +132,11 @@ class Upload extends React.Component {
     Storage.readFile('app-data.json')
       .then(data => {
         const parsed = JSON.parse(data);
-        this.setState({ appData: parsed, musicPath: parsed.sourcePath });
+        this.setState({ appData: parsed, musicPath: parsed.sourcePath }, () => {
+          Storage.readDir(parsed.sourcePath).then(files => {
+            this.setState({ fileNames: files });
+          });
+        });
       })
       .catch(err => {
         this.setState({ appData: null, musicPath: null });

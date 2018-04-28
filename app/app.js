@@ -33,7 +33,7 @@ function setup() {
     minHeight: 150,
     width: obj.width,
     height: obj.height,
-    backgroundColor: '#101010',
+    backgroundColor: '#151515',
     title: 'Mosico - Just play your music'
   });
   mainWindow.loadURL(`file://${__dirname}/index.html`);

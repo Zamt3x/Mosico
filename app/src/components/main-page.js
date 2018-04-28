@@ -5,7 +5,7 @@ class MainPage extends React.Component {
   render() {
     const Lyrics = () => <h1>Lyrics</h1>;
     return (
-      <div className="main-page">
+      <div className="main-content-container scrollbar">
         <HashRouter>
           <Switch>
             <Route path="/upload" component={Upload} />
