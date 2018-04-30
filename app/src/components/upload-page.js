@@ -2,19 +2,19 @@ import fs from 'fs';
 import path from 'path';
 import React from 'react';
 import mm from 'musicmetadata';
-import { Storage } from './utils.js';
 import { remote, dialog } from 'electron';
+import { Storage } from './utils.js';
 class Upload extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      songList: [],
       totalSongs: 0,
       appData: null,
       musicPath: null,
-      fileNames: null,
-      mouseInElement: null
+      fileNames: null
     };
-    this.getFileList = this.getFileList.bind(this);
+    this.getFileListItems = this.getFileListItems.bind(this);
     this.setFolderPath = this.setFolderPath.bind(this);
   }
   setFolderPath(fp) {
@@ -54,18 +54,19 @@ class Upload extends React.Component {
       }
       return false;
     });
-    this.setState({ totalSongs: targetFiles.length, fileNames: targetFiles });
+    this.setState({ totalSongs: targetFiles.length, fileNames: targetFiles }, () => {
+      this.getFileListItems();
+    });
   }
-  getFileList() {
+  getFileListItems() {
     let items = [];
-    // Make an array of li-elements containing all the songs
-    for (let name of this.state.fileNames) {
+    this.state.fileNames.forEach(name => {
       // Gets rid of extension name with RegExp
       const formatName = name.replace(/\.[^/.]+$/, '');
       //FIXME: potentially add settings option for choosing delimiter (-)
+      const separatedNames = formatName.split('-');
       //FIXME: potentially add setting for choosing if artist or songname comes
       // first in names (artist - name / name - artist)
-      const separatedNames = formatName.split('-');
       items.push(
         <li className="song-container btn-hide" key={name}>
           <div className="grouper-horiz">
@@ -75,11 +76,11 @@ class Upload extends React.Component {
           <p>{separatedNames[0]}</p>
         </li>
       );
-    }
-    return <ul className="song-list">{items}</ul>;
+    });
+    this.setState({ songList: items });
   }
   render() {
-    const { musicPath, fileNames, totalSongs } = this.state;
+    const { musicPath, fileNames, totalSongs, songList } = this.state;
     return musicPath ? (
       // Defined music path
       <div>
@@ -106,7 +107,9 @@ class Upload extends React.Component {
         </div>
         <h3 className="heading-info">{totalSongs} total songs</h3>
         <div className="divider" />
-        <div>{fileNames ? this.getFileList() : 'Loading files...'}</div>
+        <div>
+          <ul className="song-list">{songList}</ul>
+        </div>
       </div>
     ) : (
       // Undefined music path
