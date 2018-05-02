@@ -26,10 +26,33 @@ body {
   animation: fadeIn ease 500ms forwards;
 }
 
+.top-bar {
+  height: 30px;
+  display: flex;
+  align-items: center;
+  -webkit-app-region: drag;
+  justify-content: flex-end;
+  background-color: var(--play-bar-bg);
+}
+
+.top-bar .btn {
+  width: 45px;
+  font-size: 1.8rem;
+  text-align: center;
+}
+
+.top-bar .btn:hover:not(.close) {
+  background-color: var(--active-color);
+}
+
+.top-bar .close:hover {
+  background-color: red;
+}
+
 .grid-2col-2row {
   width: 100vw;
-  height: 100vh;
   display: grid;
+  height: calc(100vh - 30px);
   grid-template-rows: auto 80px;
   grid-template-columns: 250px auto;
 }
@@ -50,14 +73,11 @@ ul {
   font-weight: 600;
   padding: 6px 10px;
   font-size: 1.5rem;
+  user-select: none;
   border-radius: 2px;
   color: var(--font-color);
   text-transform: uppercase;
   background-color: var(--theme-color);
-}
-
-.button:hover {
-  transform: scale(1.05);
 }
 
 .main-content-container {
@@ -323,8 +343,13 @@ ul {
   width: 100%;
   display: grid;
   align-items: center;
+  transition: background 100ms ease;
   grid-template-columns: repeat(2, 1fr);
   border-bottom: 1px solid var(--play-bar-bg);
+}
+
+.main-content-container .song-container:hover {
+  background-color: var(--play-bar-bg);
 }
 
 .main-content-container .btn {
@@ -333,14 +358,6 @@ ul {
   font-size: 2.5rem;
   margin-right: 15px;
 }
-
-/* .main-content-container .btn-hide > .btn {
-  opacity: 0;
-}
-
-.song-container .btn-hide:hover > .btn {
-  opacity: 1;
-} */
 /* =============================================================================
 ** MAIN-CONTENT END
 ** =============================================================================

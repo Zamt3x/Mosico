@@ -29,6 +29,7 @@ function setup() {
   let obj = getWindowBounds();
   mainWindow = new BrowserWindow({
     show: false,
+    frame: false,
     minWidth: 320,
     minHeight: 150,
     width: obj.width,
@@ -36,6 +37,7 @@ function setup() {
     backgroundColor: '#151515',
     title: 'Mosico - Just play your music'
   });
+  mainWindow.openDevTools();
   mainWindow.loadURL(`file://${__dirname}/index.html`);
   // mainWindow initialized to show: false to avoid showing window before
   // content has loaded
