@@ -4,12 +4,40 @@ class TopBar extends React.Component {
   constructor(props) {
     super(props);
   }
+  windowMaximize() {
+    const win = remote.getCurrentWindow();
+    if (win.isMaximized()) {
+      win.unmaximize();
+    } else {
+      win.maximize();
+    }
+  }
   render() {
-    return <div className="top-bar">
-      <i className="material-icons btn">more_horiz</i>
-      <i className="material-icons btn">crop_square</i>
-      <i className="material-icons btn close">close</i>
-    </div>;
+    return (
+      <div className="top-bar">
+        <i
+          className="material-icons btn"
+          onClick={() => {
+            remote.getCurrentWindow().minimize();
+          }}>
+          remove
+        </i>
+        <i
+          className="material-icons btn"
+          onClick={() => {
+            this.windowMaximize();
+          }}>
+          crop_square
+        </i>
+        <i
+          className="material-icons btn close"
+          onClick={() => {
+            remote.getCurrentWindow().close();
+          }}>
+          close
+        </i>
+      </div>
+    );
   }
 }
 module.exports = { TopBar };

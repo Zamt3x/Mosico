@@ -13,6 +13,7 @@ html {
   --border-color: #000000;
   --active-color: #aaaaaa;
   --volume-popup-bg: #303030;
+  --button-hover-color: #666666;
   font-size: 62.5%;
 }
 
@@ -24,29 +25,6 @@ body {
   color: var(--font-color);
   background: var(--main-bg);
   animation: fadeIn ease 500ms forwards;
-}
-
-.top-bar {
-  height: 30px;
-  display: flex;
-  align-items: center;
-  -webkit-app-region: drag;
-  justify-content: flex-end;
-  background-color: var(--play-bar-bg);
-}
-
-.top-bar .btn {
-  width: 45px;
-  font-size: 1.8rem;
-  text-align: center;
-}
-
-.top-bar .btn:hover:not(.close) {
-  background-color: var(--active-color);
-}
-
-.top-bar .close:hover {
-  background-color: red;
 }
 
 .grid-2col-2row {
@@ -135,6 +113,44 @@ ul {
     height: 3px;
   }
 }
+/* =============================================================================
+** TOP-BAR START
+** =============================================================================
+*/
+.top-bar {
+  height: 30px;
+  display: flex;
+  -webkit-app-region: drag;
+  justify-content: flex-end;
+  background-color: var(--play-bar-bg);
+}
+
+.top-bar .btn {
+  width: 45px;
+  opacity: 0.6;
+  cursor: default;
+  user-select: none;
+  font-size: 1.7rem;
+  line-height: 30px;
+  text-align: center;
+  box-sizing: border-box;
+  -webkit-app-region: no-drag;
+  transition: background ease 100ms, opacity ease 100ms;
+  border: 1px solid var(--play-bar-bg);
+}
+
+.top-bar .btn:hover {
+  opacity: 1;
+  background-color: var(--button-hover-color);
+}
+
+.top-bar .close:hover {
+  background-color: red;
+}
+/* =============================================================================
+** TOP-BAR END
+** =============================================================================
+*/
 /* =============================================================================
 ** SIDE-MENU START
 ** =============================================================================

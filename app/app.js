@@ -37,12 +37,12 @@ function setup() {
     backgroundColor: '#151515',
     title: 'Mosico - Just play your music'
   });
-  mainWindow.openDevTools();
   mainWindow.loadURL(`file://${__dirname}/index.html`);
   // mainWindow initialized to show: false to avoid showing window before
   // content has loaded
   mainWindow.on('ready-to-show', () => {
     mainWindow.show();
+    mainWindow.openDevTools();
   });
   mainWindow.on('closed', () => {
     mainWindow = null;
