@@ -59,25 +59,51 @@ class Upload extends React.Component {
     });
   }
   getFileListItems() {
-    let items = [];
-    this.state.fileNames.forEach(name => {
-      // Gets rid of extension name with RegExp
-      const formatName = name.replace(/\.[^/.]+$/, '');
-      //FIXME: potentially add settings option for choosing delimiter (-)
-      const separatedNames = formatName.split('-');
-      //FIXME: potentially add setting for choosing if artist or songname comes
-      // first in names (artist - name / name - artist)
-      items.push(
-        <li className="song-container btn-hide" key={name}>
-          <div className="grouper-horiz">
-            <i className="material-icons btn">play_arrow</i>
-            <p>{separatedNames[1]}</p>
-          </div>
-          <p>{separatedNames[0]}</p>
-        </li>
-      );
+    let promises = [];
+    for (let name of this.state.fileNames) {
+      promises.push(this.formatName(name));
+    }
+    Promise.all(promises).then(data => {
+      console.log(data);
+      let items = [];
+      // for (let obj in data) {
+      //   console.log(obj);
+      // //FIXME: potentially add setting for choosing if artist or songname comes
+      // // first in names (artist - name / name - artist)
+      // items.push(
+      //   <li className="song-container btn-hide" key={name}>
+      //     <div className="grouper-horiz">
+      //       <i className="material-icons btn">play_arrow</i>
+      //       <p>{nameObj.songName}</p>
+      //     </div>
+      //     <p>
+      //       {nameObj.artist} ({nameObj.duration})
+      //     </p>
+      //   </li>
+      // );
+      // }
+      // this.setState({ songList: items });
     });
-    this.setState({ songList: items });
+  }
+  //FIXME: get duration here and make calling place wait for promise
+  //FIXME: doesnt fiend header cux lack of mp3 info
+  formatName(name) {
+    return new Promise((res, rej) => {
+      const stream = fs.createReadStream(path.join(this.state.musicPath, name));
+      mm(stream, { duration: true }, (err, metadata) => {
+        if (err) {
+          rej(err);
+        } else {
+          let songName = name;
+          // Gets rid of file extension with RegExp
+          songName = songName.replace(/\.[^/.]+$/, '');
+          //FIXME: potentially add settings option for choosing delimiter (-)
+          songName = songName.split('-');
+          stream.close();
+          res({ artist: songName[0], songName: songName[1], duration: metadata.duration });
+        }
+      });
+    });
   }
   render() {
     const { musicPath, fileNames, totalSongs, songList } = this.state;

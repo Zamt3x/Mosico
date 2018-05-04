@@ -93,6 +93,16 @@ ul {
     opacity: 1;
   }
 }
+@keyframes fadeInMoveUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 @keyframes expandPlayTrack {
   from {
     top: -3px;
@@ -297,7 +307,7 @@ ul {
 .play-bar div .volume-popup:hover,
 .play-bar .btn-volume:hover + .volume-popup {
   display: block;
-  animation: fadeIn 200ms ease forwards;
+  animation: fadeInMoveUp 200ms ease forwards;
 }
 
 .play-bar .play-track {
@@ -372,7 +382,7 @@ ul {
   cursor: pointer;
   user-select: none;
   font-size: 2.5rem;
-  margin-right: 15px;
+  margin-right: 30px;
 }
 /* =============================================================================
 ** MAIN-CONTENT END
