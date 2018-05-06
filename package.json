@@ -6,17 +6,15 @@
   "scripts": {
     "start": "electron --require babel-register ."
   },
+  "keywords": ["music"],
   "dependencies": {
-    "musicmetadata": "^2.0.5",
+    "electron-audio-conversion": "^0.1.0",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "react-sound": "^1.1.0"
   },
-  "keywords": [
-    "music"
-  ],
   "author": "Øyvind Finsnes",
   "license": "MIT",
   "devDependencies": {

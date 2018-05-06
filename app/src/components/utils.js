@@ -42,18 +42,4 @@ class Storage {
     });
   }
 }
-class UserFiles {
-  static readFile(directory, fileName) {
-    const filePath = path.join(directory, fileName);
-    return new Promise((res, rej) => {
-      fs.readFile(filePath, 'utf8', (err, data) => {
-        if (err) {
-          rej(err);
-        } else {
-          res(data);
-        }
-      });
-    });
-  }
-}
-module.exports = { Storage, UserFiles };
+module.exports = { Storage };
