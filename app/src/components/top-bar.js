@@ -1,10 +1,10 @@
 import React from 'react';
-import { remote, dialog } from 'electron';
+import { remote } from 'electron';
 class TopBar extends React.Component {
   constructor(props) {
     super(props);
   }
-  windowMaximize() {
+  toggleWindowMaximize() {
     const win = remote.getCurrentWindow();
     if (win.isMaximized()) {
       win.unmaximize();
@@ -25,7 +25,7 @@ class TopBar extends React.Component {
         <i
           className="material-icons btn"
           onClick={() => {
-            this.windowMaximize();
+            this.toggleWindowMaximize();
           }}>
           crop_square
         </i>

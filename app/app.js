@@ -1,7 +1,11 @@
 import fs from 'fs';
 import path from 'path';
 import electron from 'electron';
-import { app, BrowserWindow, ipcMain } from 'electron';
+import {
+  app,
+  BrowserWindow,
+  ipcMain
+} from 'electron';
 // Keep a global reference of the window object, omission leads to the window
 // closing automatically when the JavaScript object is garbage collected
 let mainWindow = null;
@@ -67,7 +71,10 @@ function getWindowBounds() {
     makeUserSettings(dataPath, screenSize, true);
   }
   // Return 'size' object containing width and height of screen
-  return { width: screenSize.width - 200, height: screenSize.height - 100 };
+  return {
+    width: screenSize.width - 200,
+    height: screenSize.height - 100
+  };
 }
 // Takes path to users appData-folder and bool to determine if dir 'data' should
 // be made (might already exist)

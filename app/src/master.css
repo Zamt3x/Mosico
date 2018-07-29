@@ -2,6 +2,7 @@
 ** GLOBAL STYLES AND CSS VARIABLES
 ** =============================================================================
 */
+
 html {
   /* Color */
   --main-bg: #151515;
@@ -24,6 +25,7 @@ body {
   font-size: 1.6rem;
   color: var(--font-color);
   background: var(--main-bg);
+  font-family: roboto;
   animation: fadeIn ease 500ms forwards;
 }
 
@@ -34,7 +36,9 @@ body {
   grid-template-rows: auto 80px;
   grid-template-columns: 250px auto;
 }
+
 /* Reset ul styles */
+
 ul {
   margin: 0;
   padding: 0;
@@ -81,10 +85,12 @@ ul {
   display: flex;
   align-items: center;
 }
+
 /* =============================================================================
 ** CSS KEYFRAMES FOR ANIMATIONS
 ** =============================================================================
 */
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -93,6 +99,7 @@ ul {
     opacity: 1;
   }
 }
+
 @keyframes fadeInMoveUp {
   from {
     opacity: 0;
@@ -103,6 +110,7 @@ ul {
     transform: translateY(0);
   }
 }
+
 @keyframes expandPlayTrack {
   from {
     top: -3px;
@@ -113,6 +121,7 @@ ul {
     height: 10px;
   }
 }
+
 @keyframes retractPlayTrack {
   from {
     top: -8px;
@@ -123,10 +132,12 @@ ul {
     height: 3px;
   }
 }
+
 /* =============================================================================
 ** TOP-BAR START
 ** =============================================================================
 */
+
 .top-bar {
   height: 30px;
   display: flex;
@@ -157,14 +168,17 @@ ul {
 .top-bar .close:hover {
   background-color: red;
 }
+
 /* =============================================================================
 ** TOP-BAR END
 ** =============================================================================
 */
+
 /* =============================================================================
 ** SIDE-MENU START
 ** =============================================================================
 */
+
 .side-menu {
   height: 100%;
   grid-row-end: 3;
@@ -211,14 +225,17 @@ ul {
   margin-left: 0;
   border-left: 6px solid var(--theme-color);
 }
+
 /* =============================================================================
 ** SIDE-MENU END
 ** =============================================================================
 */
+
 /* =============================================================================
 ** PLAY-BAR START
 ** =============================================================================
 */
+
 .play-bar {
   width: 100%;
   height: 80px;
@@ -282,7 +299,9 @@ ul {
 .play-bar .btn-volume {
   font-size: 3rem;
 }
+
 /* Requires three levels to override display: block declared previously */
+
 .play-bar div .volume-popup {
   top: -100px;
   right: 10px;
@@ -294,7 +313,9 @@ ul {
   border: 1px solid var(--main-bg);
   background-color: var(--volume-popup-bg);
 }
+
 /* Arrow at the bottom of volume popup */
+
 .play-bar div .volume-popup::after {
   left: 0;
   content: '';
@@ -303,9 +324,11 @@ ul {
   border: solid 15px transparent;
   border-top-color: var(--volume-popup-bg);
 }
+
 /* Show volume knob when icon or popup is hovered */
+
 .play-bar div .volume-popup:hover,
-.play-bar .btn-volume:hover + .volume-popup {
+.play-bar .btn-volume:hover+.volume-popup {
   display: block;
   animation: fadeInMoveUp 200ms ease forwards;
 }
@@ -335,18 +358,23 @@ ul {
 .play-bar .end {
   right: 20px;
 }
+
 /* Expand play-track when play-bar is hovered */
-.play-bar:hover > .play-track {
+
+.play-bar:hover>.play-track {
   animation: expandPlayTrack 200ms ease forwards;
 }
+
 /* =============================================================================
 ** PLAY-BAR END
 ** =============================================================================
 */
+
 /* =============================================================================
 ** MAIN-CONTENT START
 ** =============================================================================
 */
+
 .main-content-container .heading-info {
   color: var(--active-color);
 }
@@ -384,6 +412,7 @@ ul {
   font-size: 2.5rem;
   margin-right: 30px;
 }
+
 /* =============================================================================
 ** MAIN-CONTENT END
 ** =============================================================================
