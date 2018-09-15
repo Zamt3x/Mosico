@@ -4,10 +4,9 @@
 */
 
 html {
-  /* Color */
   --main-bg: #151515;
   --font-color: #eeeeee;
-  --play-bar-bg: #252525;
+  --playbar-bg: #252525;
   --placeholder: #333333;
   --theme-color: #db273a;
   --side-menu-bg: #202020;
@@ -111,7 +110,7 @@ ul {
   }
 }
 
-@keyframes expandPlayTrack {
+@keyframes extendDurationTrack {
   from {
     top: -3px;
     height: 3px;
@@ -122,7 +121,7 @@ ul {
   }
 }
 
-@keyframes retractPlayTrack {
+@keyframes retractDurationTrack {
   from {
     top: -8px;
     height: 8px;
@@ -143,7 +142,7 @@ ul {
   display: flex;
   -webkit-app-region: drag;
   justify-content: flex-end;
-  background-color: var(--play-bar-bg);
+  background-color: var(--playbar-bg);
 }
 
 .top-bar .btn {
@@ -157,7 +156,7 @@ ul {
   box-sizing: border-box;
   -webkit-app-region: no-drag;
   transition: background ease 100ms, opacity ease 100ms;
-  border: 1px solid var(--play-bar-bg);
+  border: 1px solid var(--playbar-bg);
 }
 
 .top-bar .btn:hover {
@@ -243,7 +242,7 @@ ul {
   grid-row-start: 2;
   position: relative;
   box-sizing: border-box;
-  background: var(--play-bar-bg);
+  background: var(--playbar-bg);
 }
 
 .play-bar .controls {
@@ -341,7 +340,7 @@ ul {
   position: absolute;
   background-color: var(--theme-color);
   border-top: 1px solid var(--border-color);
-  animation: retractPlayTrack 200ms ease forwards;
+  animation: retractDurationTrack 200ms ease forwards;
 }
 
 .play-bar .play-track p {
@@ -362,7 +361,7 @@ ul {
 /* Expand play-track when play-bar is hovered */
 
 .play-bar:hover>.play-track {
-  animation: expandPlayTrack 200ms ease forwards;
+  animation: extendDurationTrack 200ms ease forwards;
 }
 
 /* =============================================================================
@@ -390,7 +389,7 @@ ul {
 }
 
 .main-content-container .song-list {
-  margin-bottom: 50px;
+  margin-bottom: 40px;
 }
 
 .main-content-container .song-container {
@@ -399,11 +398,11 @@ ul {
   align-items: center;
   transition: background 100ms ease;
   grid-template-columns: repeat(2, 1fr);
-  border-bottom: 1px solid var(--play-bar-bg);
+  border-bottom: 1px solid var(--playbar-bg);
 }
 
 .main-content-container .song-container:hover {
-  background-color: var(--play-bar-bg);
+  background-color: var(--playbar-bg);
 }
 
 .main-content-container .btn {
