@@ -1,0 +1,36 @@
+.main-content-container .heading-info {
+  color: var(--active-color);
+}
+
+.main-content-container .path-name {
+  margin-left: 15px;
+}
+
+.main-content-container .divider {
+  width: 100%;
+  margin-top: 10px;
+  border-bottom: 1px solid var(--volume-popup-bg);
+}
+
+.main-content-container .song-list {
+  margin-bottom: 40px;
+}
+
+.main-content-container .song-container {
+  width: 100%;
+  display: grid;
+  align-items: center;
+  transition: background 100ms ease;
+  grid-template-columns: repeat(2, 1fr);
+  border-bottom: 1px solid var(--playbar-bg);
+}
+
+.main-content-container .song-container:hover {
+  background-color: var(--playbar-bg);
+}
+
+.main-content-container .btn {
+  cursor: pointer;
+  font-size: 2.5rem;
+  margin-right: 30px;
+}

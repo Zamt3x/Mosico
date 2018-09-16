@@ -1,0 +1,157 @@
+@keyframes extendDurationTrack {
+  from {
+    top: -3px;
+    height: 3px;
+  }
+  to {
+    top: -10px;
+    height: 10px;
+  }
+}
+
+@keyframes retractDurationTrack {
+  from {
+    top: -8px;
+    height: 8px;
+  }
+  to {
+    top: -3px;
+    height: 3px;
+  }
+}
+
+@keyframes scaleInVolume {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.controls {
+  width: 100%;
+  height: 80px;
+  grid-row-end: 3;
+  grid-row-start: 2;
+  position: relative;
+  box-sizing: border-box;
+  background: var(--playbar-bg);
+}
+
+.controls .bar-buttons {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.controls .bar-buttons div {
+  display: flex;
+  margin: 0 20px;
+  align-items: center;
+  justify-content: center;
+}
+
+.controls .btn {
+  margin: 0 10px;
+  cursor: pointer;
+}
+
+.controls .active {
+  color: var(--theme-color);
+}
+
+.controls .btn:active {
+  color: var(--active-color);
+  border-color: var(--active-color);
+}
+
+.controls .btn-play,
+.controls .btn-pause {
+  font-size: 5rem;
+}
+
+.controls .btn-play:hover,
+.controls .btn-pause:hover {
+  transform: scale(1.1);
+}
+
+.controls .btn-prev,
+.controls .btn-next {
+  font-size: 3.4rem;
+}
+
+.controls .btn-random,
+.controls .btn-loop {
+  font-size: 2.4rem;
+}
+
+.controls .btn-volume {
+  font-size: 3rem;
+}
+
+/* Requires three levels to override display: block declared previously */
+
+.controls div .volume-popup {
+  top: -100px;
+  right: 10px;
+  width: 30px;
+  height: 100px;
+  display: none;
+  border-radius: 5%;
+  position: absolute;
+  border: 1px solid var(--main-bg);
+  background-color: var(--volume-popup-bg);
+}
+
+/* Arrow at the bottom of volume popup */
+
+.controls div .volume-popup::after {
+  left: 0;
+  content: '';
+  bottom: -30px;
+  position: absolute;
+  border: solid 15px transparent;
+  border-top-color: var(--volume-popup-bg);
+}
+
+/* Show volume knob when icon or popup is hovered */
+
+.controls div .volume-popup:hover,
+.controls .btn-volume:hover + .volume-popup {
+  display: block;
+  animation: scaleInVolume 100ms ease forwards;
+}
+
+.controls .play-track {
+  top: -3px;
+  width: 100%;
+  height: 3px;
+  cursor: pointer;
+  position: absolute;
+  background-color: var(--theme-color);
+  border-top: 1px solid var(--border-color);
+  animation: retractDurationTrack 200ms ease forwards;
+}
+
+.controls .play-track p {
+  top: -50px;
+  z-index: -1;
+  position: absolute;
+}
+
+.controls .current {
+  left: 10px;
+}
+
+.controls .end {
+  right: 20px;
+}
+
+/* Expand play-track when controls is hovered */
+
+.controls:hover > .play-track {
+  animation: extendDurationTrack 200ms ease forwards;
+}

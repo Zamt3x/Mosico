@@ -1,38 +1,56 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Sound from 'react-sound';
-import { Storage } from './utils.js';
-class Playbar extends React.Component {
+import { Storage } from '../utilities.js';
+
+class Controls extends Component {
+
   constructor(props) {
+
     super(props);
+
     this.state = {
       play: false,
       loop: false,
       random: false,
       appData: null
     };
+
     this.toggleLoop = this.toggleLoop.bind(this);
     this.toggleTrack = this.toggleTrack.bind(this);
     this.toggleRandom = this.toggleRandom.bind(this);
+
   }
+
   toggleTrack({ target }) {
+
     this.state.play ? this.setState({ play: false }) : this.setState({ play: true });
+
   }
+
   toggleLoop() {
+
     this.state.loop ? this.setState({ loop: false }) : this.setState({ loop: true });
+
   }
+
   toggleRandom() {
+
     this.state.random ? this.setState({ random: false }) : this.setState({ random: true });
+
   }
+
   render() {
+
     const { random, loop, play, appData } = this.state;
+
     return (
-      <div className="play-bar">
+      <div className="controls">
         {/* Play track */}
         <div className="play-track">
           <p className="current">0:00</p>
           <p className="end">4:43</p>
         </div>
-        <div className="controls">
+        <div className="bar-buttons">
           {/* Song information, artist and name */}
           <div>
             <h2>Song info</h2>
@@ -51,7 +69,7 @@ class Playbar extends React.Component {
               loop
             </i>
           </div>
-          {/* Volume controls */}
+          {/* Volume control */}
           <div>
             <i className="material-icons btn btn-volume">volume_up</i>
             <div className="volume-popup hide" />
@@ -59,15 +77,18 @@ class Playbar extends React.Component {
         </div>
       </div>
     );
+
   }
+
   componentDidMount() {
-    Storage.readFile('app-data.json')
-      .then(data => {
-        this.setState({ appData: JSON.parse(data) });
-      })
-      .catch(err => {
-        this.setState({ appData: null });
-      });
+
+    Storage.readFile('app-data.json').then(data => {
+
+      this.setState({ appData: JSON.parse(data) });
+
+    }).catch(err => { this.setState({ appData: null }) });
+
   }
+
 }
-module.exports = { Playbar };
+module.exports = { Controls };

@@ -1,20 +1,29 @@
-/* =============================================================================
-** GLOBAL STYLES AND CSS VARIABLES
-** =============================================================================
-*/
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 
 html {
+  font-size: 62.5%;
   --main-bg: #151515;
   --font-color: #eeeeee;
   --playbar-bg: #252525;
   --placeholder: #333333;
   --theme-color: #db273a;
-  --side-menu-bg: #202020;
+  --menu-bg: #202020;
   --border-color: #000000;
   --active-color: #aaaaaa;
   --volume-popup-bg: #303030;
   --button-hover-color: #666666;
-  font-size: 62.5%;
+}
+
+* {
+  cursor: default;
+  user-select: none;
 }
 
 body {
@@ -36,7 +45,7 @@ body {
   grid-template-columns: 250px auto;
 }
 
-/* Reset ul styles */
+/* Reset ul-list styles */
 
 ul {
   margin: 0;
@@ -54,7 +63,6 @@ ul {
   font-weight: 600;
   padding: 6px 10px;
   font-size: 1.5rem;
-  user-select: none;
   border-radius: 2px;
   color: var(--font-color);
   text-transform: uppercase;
@@ -72,7 +80,7 @@ ul {
 }
 
 .scrollbar::-webkit-scrollbar-track {
-  background-color: var(--side-menu-bg);
+  background-color: var(--menu-bg);
 }
 
 .scrollbar::-webkit-scrollbar-thumb {
@@ -84,335 +92,3 @@ ul {
   display: flex;
   align-items: center;
 }
-
-/* =============================================================================
-** CSS KEYFRAMES FOR ANIMATIONS
-** =============================================================================
-*/
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes fadeInMoveUp {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes extendDurationTrack {
-  from {
-    top: -3px;
-    height: 3px;
-  }
-  to {
-    top: -10px;
-    height: 10px;
-  }
-}
-
-@keyframes retractDurationTrack {
-  from {
-    top: -8px;
-    height: 8px;
-  }
-  to {
-    top: -3px;
-    height: 3px;
-  }
-}
-
-/* =============================================================================
-** TOP-BAR START
-** =============================================================================
-*/
-
-.top-bar {
-  height: 30px;
-  display: flex;
-  -webkit-app-region: drag;
-  justify-content: flex-end;
-  background-color: var(--playbar-bg);
-}
-
-.top-bar .btn {
-  width: 45px;
-  opacity: 0.6;
-  cursor: default;
-  user-select: none;
-  font-size: 1.7rem;
-  line-height: 30px;
-  text-align: center;
-  box-sizing: border-box;
-  -webkit-app-region: no-drag;
-  transition: background ease 100ms, opacity ease 100ms;
-  border: 1px solid var(--playbar-bg);
-}
-
-.top-bar .btn:hover {
-  opacity: 1;
-  background-color: var(--button-hover-color);
-}
-
-.top-bar .close:hover {
-  background-color: red;
-}
-
-/* =============================================================================
-** TOP-BAR END
-** =============================================================================
-*/
-
-/* =============================================================================
-** SIDE-MENU START
-** =============================================================================
-*/
-
-.side-menu {
-  height: 100%;
-  grid-row-end: 3;
-  grid-row-start: 1;
-  box-sizing: border-box;
-  background-color: var(--side-menu-bg);
-  border-right: solid 1px var(--border-color);
-}
-
-.side-menu .logo {
-  width: 100%;
-  height: 60px;
-  background-color: var(--placeholder);
-}
-
-.side-menu .links-container {
-  width: 100%;
-  display: flex;
-  margin-top: 30px;
-  flex-direction: column;
-}
-
-.side-menu .link {
-  user-select: none;
-  font-size: 1.9rem;
-  margin: 0 0 15px 6px;
-  text-decoration: none;
-  color: var(--font-color);
-  padding: 10px 0 10px 25px;
-  transition: color ease 150ms;
-}
-
-.side-menu .list-heading {
-  cursor: default;
-  margin-left: -5px;
-  color: var(--active-color);
-}
-
-.side-menu .link:hover:not(.active) {
-  color: var(--active-color);
-}
-
-.side-menu .active {
-  margin-left: 0;
-  border-left: 6px solid var(--theme-color);
-}
-
-/* =============================================================================
-** SIDE-MENU END
-** =============================================================================
-*/
-
-/* =============================================================================
-** PLAY-BAR START
-** =============================================================================
-*/
-
-.play-bar {
-  width: 100%;
-  height: 80px;
-  grid-row-end: 3;
-  grid-row-start: 2;
-  position: relative;
-  box-sizing: border-box;
-  background: var(--playbar-bg);
-}
-
-.play-bar .controls {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.play-bar .controls div {
-  display: flex;
-  margin: 0 20px;
-  align-items: center;
-  justify-content: center;
-}
-
-.play-bar .btn {
-  margin: 0 10px;
-  cursor: pointer;
-  user-select: none;
-}
-
-.play-bar .active {
-  color: var(--theme-color);
-}
-
-.play-bar .btn:active {
-  color: var(--active-color);
-  border-color: var(--active-color);
-}
-
-.play-bar .btn-play,
-.play-bar .btn-pause {
-  font-size: 5rem;
-}
-
-.play-bar .btn-play:hover,
-.play-bar .btn-pause:hover {
-  transform: scale(1.1);
-}
-
-.play-bar .btn-prev,
-.play-bar .btn-next {
-  font-size: 3.4rem;
-}
-
-.play-bar .btn-random,
-.play-bar .btn-loop {
-  font-size: 2.4rem;
-}
-
-.play-bar .btn-volume {
-  font-size: 3rem;
-}
-
-/* Requires three levels to override display: block declared previously */
-
-.play-bar div .volume-popup {
-  top: -100px;
-  right: 10px;
-  width: 30px;
-  height: 100px;
-  display: none;
-  border-radius: 5%;
-  position: absolute;
-  border: 1px solid var(--main-bg);
-  background-color: var(--volume-popup-bg);
-}
-
-/* Arrow at the bottom of volume popup */
-
-.play-bar div .volume-popup::after {
-  left: 0;
-  content: '';
-  bottom: -30px;
-  position: absolute;
-  border: solid 15px transparent;
-  border-top-color: var(--volume-popup-bg);
-}
-
-/* Show volume knob when icon or popup is hovered */
-
-.play-bar div .volume-popup:hover,
-.play-bar .btn-volume:hover+.volume-popup {
-  display: block;
-  animation: fadeInMoveUp 200ms ease forwards;
-}
-
-.play-bar .play-track {
-  top: -3px;
-  width: 100%;
-  height: 3px;
-  cursor: pointer;
-  position: absolute;
-  background-color: var(--theme-color);
-  border-top: 1px solid var(--border-color);
-  animation: retractDurationTrack 200ms ease forwards;
-}
-
-.play-bar .play-track p {
-  top: -50px;
-  z-index: -1;
-  user-select: none;
-  position: absolute;
-}
-
-.play-bar .current {
-  left: 10px;
-}
-
-.play-bar .end {
-  right: 20px;
-}
-
-/* Expand play-track when play-bar is hovered */
-
-.play-bar:hover>.play-track {
-  animation: extendDurationTrack 200ms ease forwards;
-}
-
-/* =============================================================================
-** PLAY-BAR END
-** =============================================================================
-*/
-
-/* =============================================================================
-** MAIN-CONTENT START
-** =============================================================================
-*/
-
-.main-content-container .heading-info {
-  color: var(--active-color);
-}
-
-.main-content-container .path-name {
-  margin-left: 15px;
-}
-
-.main-content-container .divider {
-  width: 100%;
-  margin-top: 10px;
-  border-bottom: 1px solid var(--volume-popup-bg);
-}
-
-.main-content-container .song-list {
-  margin-bottom: 40px;
-}
-
-.main-content-container .song-container {
-  width: 100%;
-  display: grid;
-  align-items: center;
-  transition: background 100ms ease;
-  grid-template-columns: repeat(2, 1fr);
-  border-bottom: 1px solid var(--playbar-bg);
-}
-
-.main-content-container .song-container:hover {
-  background-color: var(--playbar-bg);
-}
-
-.main-content-container .btn {
-  cursor: pointer;
-  user-select: none;
-  font-size: 2.5rem;
-  margin-right: 30px;
-}
-
-/* =============================================================================
-** MAIN-CONTENT END
-** =============================================================================
-*/

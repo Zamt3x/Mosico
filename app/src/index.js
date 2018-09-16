@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { Menu } from './components/side-menu.js';
-import { Playbar } from './components/play-bar.js';
-import { MainPage } from './components/main-page.js';
-import { TopBar } from './components/top-bar.js';
+import { Titlebar } from './components/Titlebar.js';
+import { Menu } from './components/Menu.js';
+import { Content } from './components/Content.js';
+import { Controls } from './components/Controls.js';
 
 class App extends Component {
 
@@ -11,11 +11,11 @@ class App extends Component {
 
     return (
       <div className="app">
-        <TopBar />
+        <Titlebar />
         <div className="grid-2col-2row">
           <Menu />
-          <MainPage />
-          <Playbar />
+          <Content />
+          <Controls />
         </div>
       </div>
     );

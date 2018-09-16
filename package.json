@@ -2,7 +2,7 @@
   "name": "mosico",
   "version": "1.0.0",
   "description": "Simple music player for local files.",
-  "main": "./app/app.js",
+  "main": "./app.js",
   "scripts": {
     "start": "electron --require babel-register ."
   },

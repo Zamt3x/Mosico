@@ -1,9 +1,10 @@
 import fs from 'fs';
 import path from 'path';
-import React from 'react';
-import { Storage } from './utils.js';
+import React, { Component } from 'react';
+import { Storage } from '../../utilities.js';
 import { remote, dialog } from 'electron';
-class Upload extends React.Component {
+
+class Local extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -153,4 +154,4 @@ class Upload extends React.Component {
       });
   }
 }
-module.exports = { Upload };
+module.exports = { Local };

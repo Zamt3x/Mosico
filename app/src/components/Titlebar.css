@@ -1,0 +1,28 @@
+.titlebar {
+  height: 30px;
+  display: flex;
+  -webkit-app-region: drag;
+  justify-content: flex-end;
+  background-color: var(--playbar-bg);
+}
+
+.titlebar .btn {
+  width: 45px;
+  opacity: 0.6;
+  font-size: 1.7rem;
+  line-height: 30px;
+  text-align: center;
+  box-sizing: border-box;
+  -webkit-app-region: no-drag;
+  transition: background ease 100ms, opacity ease 100ms;
+  border: 1px solid var(--playbar-bg);
+}
+
+.titlebar .btn:hover {
+  opacity: 1;
+  background-color: var(--button-hover-color);
+}
+
+.titlebar .btn-close:hover {
+  background-color: red;
+}
