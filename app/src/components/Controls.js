@@ -23,25 +23,31 @@ class Controls extends Component {
 
   toggleTrack({ target }) {
 
-    this.state.play ? this.setState({ play: false }) : this.setState({ play: true });
+    const { play } = this.state;
+
+    play ? this.setState({ play: false }) : this.setState({ play: true });
 
   }
 
   toggleLoop() {
 
-    this.state.loop ? this.setState({ loop: false }) : this.setState({ loop: true });
+    const { loop } = this.state;
+
+    loop ? this.setState({ loop: false }) : this.setState({ loop: true });
 
   }
 
   toggleRandom() {
 
-    this.state.random ? this.setState({ random: false }) : this.setState({ random: true });
+    const { random } = this.state;
+
+    random ? this.setState({ random: false }) : this.setState({ random: true });
 
   }
 
   render() {
 
-    const { random, loop, play, appData } = this.state;
+    const { random, loop, play } = this.state;
 
     return (
       <div className="controls">

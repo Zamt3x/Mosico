@@ -107,7 +107,7 @@ class Local extends Component {
       // Get rid of file extension
       name = name.replace(/\.[^/.]+$/, '');
 
-      //TODO: ADD potentially add settings option for choosing delimiter ("-" is default)
+      //TODO: ADD settings option for choosing delimiter? ("-" is default)
       name = name.split('-');
 
       return { artist: name[0], song: name[1] };
@@ -121,7 +121,7 @@ class Local extends Component {
 
       const track = formatFileName(name);
 
-      //TODO: ADD potentially add setting for choosing if artist or song comes
+      //TODO: ADD setting for choosing if artist or song comes?
       // first in names (artist - name / name - artist)
 
       // FIXME: JANKY looks janky and fucked up
@@ -145,22 +145,26 @@ class Local extends Component {
 
     const { musicPath, totalSongs, songList } = this.state;
 
-    const definedPathComponent = () => {
+    const openDialog = () => {
 
+      remote.dialog.showOpenDialog(
+        // Window that the modal is tied to (current window)
+        remote.getCurrentWindow(),
+        // Set the mode to directory
+        { properties: ['openDirectory'] },
+        // Callback function to process selected folder
+        filesPath => { this.setFolderPath(filesPath[0]) }
+      );
+
+    }
+
+    return musicPath ? (
       <div>
         <h1>Play from local files</h1>
         <div className="grouper-horiz">
           <button
             className="button"
-            onClick={() => {
-              remote.dialog.showOpenDialog(
-                remote.getCurrentWindow(),
-                { properties: ['openDirectory'] },
-                filesPath => {
-                  this.setFolderPath(filesPath[0]);
-                }
-              );
-            }}>
+            onClick={() => { openDialog() }}>
             Change
           </button>
           <h3 className="heading-info path-name">{musicPath}</h3>
@@ -171,47 +175,48 @@ class Local extends Component {
           <ul className="song-list">{songList}</ul>
         </div>
       </div>
-
-    }
-
-    const undefinedPathComponent = () => {
-
-      <div>
-        <h1>Set path to local files</h1>
-        <button
-          className="button"
-          onClick={() => {
-            remote.dialog.showOpenDialog(
-              remote.getCurrentWindow(),
-              { properties: ['openDirectory'] },
-              filesPath => {
-                this.setFolderPath(filesPath);
-              }
-            );
-          }}>
-          Pick Folder
+    ) : (
+        <div>
+          <h1>Set path to local files</h1>
+          <button
+            className="button"
+            onClick={() => { openDialog() }}>
+            Pick Folder
         </button>
-      </div>
-
-    }
-
-    return musicPath ? definedPathComponent() : undefinedPathComponent();
+        </div>
+      );
 
   }
 
   componentDidMount() {
+
     Storage.readFile('app-data.json')
       .then(data => {
+
         const parsed = JSON.parse(data);
+
         this.setState({ appData: parsed, musicPath: parsed.sourcePath }, () => {
+
           Storage.readDir(parsed.sourcePath).then(files => {
+
             this.filterFiles(files);
+
+          }).catch(err => {
+
+            // TODO: ERRMSG error reading from specified folder?
+
           });
+
         });
+
       })
       .catch(err => {
+
+        // TODO: ERRMSG error reading file?
         this.setState({ appData: null, musicPath: null });
+
       });
+
   }
 
 }
