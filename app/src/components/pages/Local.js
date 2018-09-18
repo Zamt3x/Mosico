@@ -98,36 +98,55 @@ class Local extends Component {
   }
 
   getFileListItems() {
+
+    // INPUT String: name (name of the song, which could be
+    // artist - name or name - artist)
+    // OUTPUT Object: 
+    const formatFileName = (name) => {
+
+      // Get rid of file extension
+      name = name.replace(/\.[^/.]+$/, '');
+
+      //TODO: ADD potentially add settings option for choosing delimiter ("-" is default)
+      name = name.split('-');
+
+      return { artist: name[0], song: name[1] };
+
+    }
+
     let items = [];
-    for (let name of this.state.fileNames) {
-      const track = this.formatName(name);
-      //FIXME: potentially add setting for choosing if artist or songname comes
+    const { fileNames } = this.state;
+
+    for (let name of fileNames) {
+
+      const track = formatFileName(name);
+
+      //TODO: ADD potentially add setting for choosing if artist or song comes
       // first in names (artist - name / name - artist)
+
+      // FIXME: JANKY looks janky and fucked up
       items.push(
         <li className="song-container" key={name}>
           <div className="grouper-horiz">
             <i className="material-icons btn">play_arrow</i>
-            <p>{track.songName}</p>
+            <p>{track.song}</p>
           </div>
           <p>{track.artist}</p>
         </li>
       );
-    }
-    this.setState({ songList: items });
-  }
 
-  formatName(name) {
-    // Gets rid of file extension with RegExp
-    name = name.replace(/\.[^/.]+$/, '');
-    //FIXME: potentially add settings option for choosing delimiter (-)
-    name = name.split('-');
-    return { artist: name[0], songName: name[1] };
+    }
+
+    this.setState({ songList: items });
+
   }
 
   render() {
-    const { musicPath, fileNames, totalSongs, songList } = this.state;
-    return musicPath ? (
-      // Defined music path
+
+    const { musicPath, totalSongs, songList } = this.state;
+
+    const definedPathComponent = () => {
+
       <div>
         <h1>Play from local files</h1>
         <div className="grouper-horiz">
@@ -136,11 +155,7 @@ class Local extends Component {
             onClick={() => {
               remote.dialog.showOpenDialog(
                 remote.getCurrentWindow(),
-                {
-                  buttonLabel: 'Set folder',
-                  properties: ['openDirectory'],
-                  title: 'Browse for folder'
-                },
+                { properties: ['openDirectory'] },
                 filesPath => {
                   this.setFolderPath(filesPath[0]);
                 }
@@ -156,29 +171,32 @@ class Local extends Component {
           <ul className="song-list">{songList}</ul>
         </div>
       </div>
-    ) : (
-        // Undefined music path
-        <div>
-          <h1>Set path to local files</h1>
-          <button
-            className="button"
-            onClick={() => {
-              remote.dialog.showOpenDialog(
-                remote.getCurrentWindow(),
-                {
-                  buttonLabel: 'Set folder',
-                  properties: ['openDirectory'],
-                  title: 'Browse for folder'
-                },
-                filesPath => {
-                  this.setFolderPath(filesPath);
-                }
-              );
-            }}>
-            Pick Folder
+
+    }
+
+    const undefinedPathComponent = () => {
+
+      <div>
+        <h1>Set path to local files</h1>
+        <button
+          className="button"
+          onClick={() => {
+            remote.dialog.showOpenDialog(
+              remote.getCurrentWindow(),
+              { properties: ['openDirectory'] },
+              filesPath => {
+                this.setFolderPath(filesPath);
+              }
+            );
+          }}>
+          Pick Folder
         </button>
-        </div>
-      );
+      </div>
+
+    }
+
+    return musicPath ? definedPathComponent() : undefinedPathComponent();
+
   }
 
   componentDidMount() {
