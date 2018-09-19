@@ -4,6 +4,7 @@ import { Titlebar } from './components/Titlebar.js';
 import { Menu } from './components/Menu.js';
 import { Content } from './components/Content.js';
 import { Controls } from './components/Controls.js';
+import Modal from './components/Modal.js';
 
 class App extends Component {
 
@@ -11,6 +12,7 @@ class App extends Component {
 
     return (
       <div className="app">
+        <Modal />
         <Titlebar />
         <div className="grid-2col-2row">
           <Menu />

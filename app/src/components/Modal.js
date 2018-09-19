@@ -18,6 +18,16 @@ class Modal extends Component {
 
   }
 
+  setData(type, subType, content) {
+
+    this.setState({
+      type: type ? type : null,
+      subType: subType ? subType : null,
+      content: content ? content : null,
+    });
+
+  }
+
   render() {
 
     const { type, subType } = this.state;
@@ -40,14 +50,6 @@ class Modal extends Component {
 
   }
 
-  /* componentDidMount() {
-
-    // Set the context to this in modal
-    modal = this;
-
-    
-  } */
-  
 }
 
-module.exports = { Modal };
+export default Modal;
