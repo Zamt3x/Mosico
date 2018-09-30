@@ -1,27 +1,17 @@
 import React, { Component } from 'react';
 import Sound from 'react-sound';
-import { Storage } from '../utilities.js';
+import Storage from './utils/Storage';
 
 class Controls extends Component {
 
-  constructor(props) {
-
-    super(props);
-
-    this.state = {
-      play: false,
-      loop: false,
-      random: false,
-      appData: null
-    };
-
-    this.toggleLoop = this.toggleLoop.bind(this);
-    this.toggleTrack = this.toggleTrack.bind(this);
-    this.toggleRandom = this.toggleRandom.bind(this);
-
+  state = {
+    play: false,
+    loop: false,
+    random: false,
+    appData: null
   }
 
-  toggleTrack({ target }) {
+  toggleTrack = () => {
 
     const { play } = this.state;
 
@@ -29,7 +19,7 @@ class Controls extends Component {
 
   }
 
-  toggleLoop() {
+  toggleLoop = () => {
 
     const { loop } = this.state;
 
@@ -37,7 +27,7 @@ class Controls extends Component {
 
   }
 
-  toggleRandom() {
+  toggleRandom = () => {
 
     const { random } = this.state;
 
@@ -97,4 +87,5 @@ class Controls extends Component {
   }
 
 }
-module.exports = { Controls };
+
+export default Controls;

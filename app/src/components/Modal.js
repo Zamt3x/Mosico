@@ -2,20 +2,14 @@ import React, { Component } from 'react';
 
 class Modal extends Component {
 
-  constructor() {
-
-    super();
-
-    this.state = {
-      // message, settings
-      type: null,
-      // message: error, warning, info
-      // settings: app-settings
-      subType: null,
-      // Only if type is message
-      content: null,
-    }
-
+  state = {
+    // message, settings
+    type: null,
+    // message: error, warning, info
+    // settings: app-settings
+    subType: null,
+    // Only if type is message
+    content: null,
   }
 
   setData(type, subType, content) {

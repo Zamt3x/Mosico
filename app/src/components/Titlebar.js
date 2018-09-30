@@ -16,4 +16,4 @@ const Titlebar = () => {
 
 }
 
-module.exports = { Titlebar };
+export default Titlebar;

@@ -69,7 +69,7 @@ ul {
   background-color: var(--theme-color);
 }
 
-.main-content-container {
+.content-container {
   overflow-y: auto;
   padding: 30px 60px 0;
   box-sizing: border-box;

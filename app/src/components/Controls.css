@@ -108,7 +108,7 @@
 
 /* Arrow at the bottom of volume popup */
 
-.controls div .volume-popup::after {
+.controls .volume-popup::after {
   left: 0;
   content: '';
   bottom: -30px;
@@ -117,9 +117,7 @@
   border-top-color: var(--volume-popup-bg);
 }
 
-/* Show volume knob when icon or popup is hovered */
-
-.controls div .volume-popup:hover,
+.controls .volume-popup:hover,
 .controls .btn-volume:hover + .volume-popup {
   display: block;
   animation: scaleInVolume 100ms ease forwards;
@@ -142,6 +140,8 @@
   position: absolute;
 }
 
+/* FIXME: current and end looks scuffed af */
+
 .controls .current {
   left: 10px;
 }
@@ -149,8 +149,6 @@
 .controls .end {
   right: 20px;
 }
-
-/* Expand play-track when controls is hovered */
 
 .controls:hover > .play-track {
   animation: extendDurationTrack 200ms ease forwards;

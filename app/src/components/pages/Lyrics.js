@@ -1,12 +1,8 @@
-// Lyrics source: https://developer.musixmatch.com/documentation
-
 import React, { Component } from 'react';
 
-class Lyrics extends Component {
+// Lyrics source: https://developer.musixmatch.com/documentation
 
-  constructor(props) {
-    super(props);
-  }
+class Lyrics extends Component {
 
   render() {
 
@@ -17,4 +13,5 @@ class Lyrics extends Component {
   }
 
 }
-module.exports = { Lyrics };
+
+export default Lyrics;

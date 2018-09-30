@@ -1,31 +1,22 @@
 import path from 'path';
 import React, { Component } from 'react';
-import { Storage } from '../../utilities.js';
 import { remote, dialog } from 'electron';
+import Storage from '../utils/Storage';
 
 class Local extends Component {
 
-  constructor(props) {
-
-    super(props);
-
-    this.state = {
-      songList: [],
-      totalSongs: 0,
-      appData: null,
-      musicPath: null,
-      fileNames: null
-    };
-
-    this.getFileListItems = this.getFileListItems.bind(this);
-    this.setFolderPath = this.setFolderPath.bind(this);
-
+  state = {
+    songList: [],
+    totalSongs: 0,
+    appData: null,
+    musicPath: null,
+    fileNames: null
   }
 
-  setFolderPath(fp) {
+  setFolderPath = path => {
 
     // Replace backslashes with forwardslashes in path and store it
-    const folderPath = fp.replace(/\\/g, '/');
+    const folderPath = path.replace(/\\/g, '/');
 
     // Attempt to read the file 'app-data.json'
     Storage.readFile('app-data.json')
@@ -68,7 +59,7 @@ class Local extends Component {
 
   }
 
-  filterFiles(files) {
+  filterFiles = files => {
 
     // Allowed file types (audio)
     const EXT = ['.mp3', '.ogg', '.flac', '.wav', '.aac'];
@@ -97,7 +88,7 @@ class Local extends Component {
 
   }
 
-  getFileListItems() {
+  getFileListItems = () => {
 
     // INPUT String: name (name of the song, which could be
     // artist - name or name - artist)
@@ -221,4 +212,4 @@ class Local extends Component {
 
 }
 
-module.exports = { Local };
+export default Local;
