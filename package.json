@@ -10,7 +10,6 @@
     "music"
   ],
   "dependencies": {
-    "babel-plugin-react-css-modules": "^3.4.2",
     "electron-audio-conversion": "^0.1.0",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
