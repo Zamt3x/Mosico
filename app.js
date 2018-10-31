@@ -43,7 +43,7 @@ function setup() {
     backgroundColor: '#151515',
   });
 
-  mainWindow.loadURL(`file://${__dirname}/app/public/index.html`);
+  mainWindow.loadURL(`file://${__dirname}/app/index.html`);
 
   // Window is initialized to show: false to avoid white flash (show after styles loaded)
   mainWindow.on('ready-to-show', () => {

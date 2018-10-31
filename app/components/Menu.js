@@ -2,7 +2,6 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 const Menu = () => {
-
   return (
     <div className="menu">
       <div className="logo" />
@@ -15,7 +14,6 @@ const Menu = () => {
       </ul>
     </div>
   );
-
 }
 
 export default Menu;

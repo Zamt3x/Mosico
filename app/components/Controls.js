@@ -3,7 +3,6 @@ import Sound from 'react-sound';
 import Storage from './utils/Storage';
 
 class Controls extends Component {
-
   state = {
     play: false,
     loop: false,
@@ -12,31 +11,21 @@ class Controls extends Component {
   }
 
   toggleTrack = () => {
-
     const { play } = this.state;
-
     play ? this.setState({ play: false }) : this.setState({ play: true });
-
   }
 
   toggleLoop = () => {
-
     const { loop } = this.state;
-
     loop ? this.setState({ loop: false }) : this.setState({ loop: true });
-
   }
 
   toggleRandom = () => {
-
     const { random } = this.state;
-
     random ? this.setState({ random: false }) : this.setState({ random: true });
-
   }
 
   render() {
-
     const { random, loop, play } = this.state;
 
     return (
@@ -73,19 +62,13 @@ class Controls extends Component {
         </div>
       </div>
     );
-
   }
 
   componentDidMount() {
-
     Storage.readFile('app-data.json').then(data => {
-
       this.setState({ appData: JSON.parse(data) });
-
     }).catch(err => { this.setState({ appData: null }) });
-
   }
-
 }
 
 export default Controls;

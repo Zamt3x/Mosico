@@ -9,22 +9,20 @@
   <!-- Roboto font by Christian Robertson from Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   <!-- "Master"-file to house global styles and variables -->
-  <link rel="stylesheet" href="../src/index.css">
+  <link rel="stylesheet" href="./index.css">
   <!-- Component-specific stylesheets -->
-  <link rel="stylesheet" href="../src/components/Titlebar.css">
-  <link rel="stylesheet" href="../src/components/Menu.css">
-  <link rel="stylesheet" href="../src/components/Content.css">
-  <link rel="stylesheet" href="../src/components/Controls.css">
+  <link rel="stylesheet" href="./components/Titlebar.css">
+  <link rel="stylesheet" href="./components/Menu.css">
+  <link rel="stylesheet" href="./components/Content.css">
+  <link rel="stylesheet" href="./components/Controls.css">
   <!-- Stylesheets for components linked in menu -->
-  <link rel="stylesheet" href="../src/components/pages/Local.css">
+  <link rel="stylesheet" href="./components/pages/Local.css">
 </head>
 
 <body>
   <div id="root"></div>
-  <script>
-    require('babel-register');
-    require('../src/index.js');
-  </script>
+  <script>require('babel-register');</script>
+  <script>require('./index');</script>
 </body>
 
 </html>

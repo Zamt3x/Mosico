@@ -9,9 +9,7 @@ import Controls from './components/Controls';
 import Modal from './components/Modal';
 
 class App extends Component {
-
   render() {
-
     return (
       <HashRouter>
         <div className="app">
@@ -25,9 +23,7 @@ class App extends Component {
         </div>
       </HashRouter>
     );
-
   }
-
 }
 
 ReactDOM.render(<App />, document.getElementById('root'));
